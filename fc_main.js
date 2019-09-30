@@ -82,7 +82,7 @@ function setOverrides() {
   FrozenCookies.caches.upgrades = [];
   
   if (!blacklist[FrozenCookies.blacklist]) {
-    FrozenCookies.blacklist = 'none';
+    FrozenCookies.blacklist = 0;
   }
   Beautify = fcBeautify;
   Game.sayTime = function(time,detail) {return timeDisplay(time/Game.fps);}
@@ -189,7 +189,6 @@ var numberFormatters = [
     ' octodecillion',
     ' novemdecillion',
     ' vigintillion'
-
   ]),
 
   formatEveryThirdPower([
@@ -214,7 +213,6 @@ var numberFormatters = [
     ' Ocd',
     ' Nod',
     ' Vig'
-
   ]),
 
   formatEveryThirdPower([
@@ -239,7 +237,6 @@ var numberFormatters = [
     ' TN',
     ' BT',
     ' BTk'
-
   ]),
   scientificNotation
 ];
@@ -658,7 +655,7 @@ function calculateChainValue(bankAmount, cps, digit) {
   return 125 * Math.pow(9,(n-3)) * digit;
 }
 
-function chocolateValue(bankAmount) {
+function chocolateValue(bankAmount,earthShatter) {
   var value = 0;
   if (Game.HasUnlocked('Chocolate egg') && !Game.Has('Chocolate egg')) {
     bankAmount = (bankAmount != null && bankAmount !== 0) ? bankAmount : Game.cookies;
@@ -735,7 +732,7 @@ function bestBank(minEfficiency) {
   var bankLevels = [0, luckyBank(), luckyFrenzyBank(), chainBank()].sort(function(a,b){return b-a;}).map(function(bank){
     return {'cost': bank, 'efficiency': cookieEfficiency(Game.cookies, bank)};
   }).filter(function(bank){
-    return (bank.efficiency <= minEfficiency) ? bank : null;
+    return (bank.efficiency >= 0 && bank.efficiency <= minEfficiency) ? bank : null;
   });
   return bankLevels[0];
 }
@@ -965,6 +962,7 @@ function upgradeStats(recalculate) {
 
 function isUnavailable(upgrade, upgradeBlacklist) {
   var result = false;
+  var switchBlacklist = [331,333,414,361,452,227,563,564];
 
   var needed = unfinishedUpgradePrereqs(upgrade);
   result = result || !upgrade.unlocked && !needed;
@@ -973,8 +971,9 @@ function isUnavailable(upgrade, upgradeBlacklist) {
   result = result || (needed && _.find(needed, function(a){return a.type == "wrinklers"}) != null);
   result = result || (upgrade.season && !haveAll(Game.season));
 
-  if (upgrade.id == 331) {
-    result = true; // blacklist golden switch from being used, until proper logic can be implemented
+  // Blacklist problematic switches
+  if (switchBlacklist.includes(upgrade.id) {
+    result = true;
   }
 
   return result;
@@ -1016,10 +1015,22 @@ function defaultPurchase() {
 
 function totalDiscount(building) {                                                                                    
   var price = 1;
-  if (Game.Has('Season savings') && building) price *= 0.99;
-  if (Game.Has('Toy workshop') && !building) price *= 0.95;
-  if (Game.Has('Santa\'s dominion')) price *= (building ? 0.99 : 0.98);
-  if (Game.Has('Faberge egg')) price *= 0.99;
+  if (building) {
+    if (Game.Has('Season savings')) price *= 0.99;
+    if (Game.Has('Santa\'s dominion')) price *= 0.99;
+    if (Game.Has('Faberge egg')) price *= 0.99;
+    if (Game.Has('Divine discount')) price*=0.99;
+    if (Game.hasAura('Fierce Hoarder')) price*=0.98;
+    if (Game.hasBuff('Everything must go')) price*=0.95;
+  } else {
+    if (Game.Has('Toy workshop')) price*=0.95;
+    if (Game.Has('Five-finger discount')) price*=Math.pow(0.99,Game.Objects['Cursor'].amount/100);
+    if (Game.Has('Santa\'s dominion')) price*=0.98;
+    if (Game.Has('Faberge egg')) price*=0.99;
+    if (Game.Has('Divine sales')) price*=0.99;
+    if (Game.hasAura('Master of the Armory')) price*=0.98;
+  }
+
   return price;
 }
 
