@@ -1,12 +1,14 @@
 // Global Variables
-var scriptElement = document.getElementById( 'frozenCookieScript' ),
+var scriptElement = document.getElementById('frozenCookieScript') !== null ?
+		document.getElementById('frozenCookieScript') : 
+		document.getElementById('modscript_frozen_cookies'),
 	baseUrl = scriptElement !== null ?
 		scriptElement.getAttribute('src').replace(/\/frozen_cookies\.js$/, '') :
-		'https://cdn.rawgit.com/Icehawk78/FrozenCookies/master',
+		'https://vizzie-tx.github.io/FrozenCookies',
 	FrozenCookies = {
 		'baseUrl': baseUrl,
-		'branch' : 'Beta-',
-		'version': '1.5'
+		'branch' : '',
+		'version': '2.012-1.0'
 	};
 
 // Load external libraries
