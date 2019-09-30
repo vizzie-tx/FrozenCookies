@@ -87,14 +87,7 @@ function setOverrides() {
   Beautify = fcBeautify;
   Game.sayTime = function(time,detail) {return timeDisplay(time/Game.fps);}
   Game.oldReset = Game.Reset;
-  Game.oldWriteSave = Game.WriteSave;
-  Game.oldLoadSave = Game.LoadSave;
   Game.Reset = fcReset;
-  Game.WriteSave = fcWriteSave;
-//  if (FrozenCookies.saveWrinklers && localStorage.wrinklers) {
-//    Game.wrinklers = JSON.parse(localStorage.wrinklers);
-//  }
-  Game.Win = fcWin;
   Game.oldBackground = Game.DrawBackground;
   Game.DrawBackground = function() {Game.oldBackground(); updateTimers();}
   // Remove the following when turning on tooltop code
@@ -306,13 +299,6 @@ function fcReset() {
   FrozenCookies.trackedStats = [];
   updateLocalStorage();
   recommendationList(true);
-}
-
-function fcWriteSave(exporting) {
-//  if (FrozenCookies.saveWrinklers && Game.wrinklers) {
-//    localStorage.wrinklers = JSON.stringify(Game.wrinklers);
-//  }
-  return Game.oldWriteSave(exporting);
 }
 
 function updateLocalStorage() {
@@ -1467,25 +1453,6 @@ function doTimeTravel() {
     logEvent('Time travel', 'Travelled ' + timeDisplay(time) + ' into the future.');
   }
 */
-}
-
-function fcWin(what) {
-  if (typeof what==='string') {
-    if (Game.Achievements[what]) {
-      if (Game.Achievements[what].won==0) {
-        Game.Achievements[what].won=1;
-        if (!FrozenCookies.disabledPopups) {
-          logEvent('Achievement', 'Achievement unlocked :<br>'+Game.Achievements[what].name+'<br> ', true);
-        }
-        if (Game.Achievements[what].pool != 'shadow') {
-          Game.AchievementsOwned++;
-        }
-        Game.recalculateGains=1;
-      }
-    }
-  } else {
-    for (var i in what) {Game.Win(what[i]);}
-  }
 }
 
 function logEvent(event, text, popup) {
