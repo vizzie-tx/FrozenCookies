@@ -318,7 +318,6 @@ var upgradeJson = [
   {'id':252,'buildings':[0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,15,0],'upgrades':[]},
   {'id':252,'buildings':[0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,15],'upgrades':[]},
  
-	//Cursor=1,Grandma=2,Farm=3,Mine=4,Factory=5,Bank=6,Temple=7,Wizard Tower=8,Shimpemt=9,Alchemy Lab=10,Portal=11,Time Machine=12,Antimatter Condenser=13,Prism=14,Chancemaker,Fractal Engince,Javascript Console
   {'id':369,'buildings':[0,0,15,0,0,0,0,0,0,0,0,15,0,0,0,0,0],'upgrades':[393]},
   {'id':371,'buildings':[0,0,0,15,0,0,0,15,0,0,0,0,0,0,0,0,0],'upgrades':[393]},
   {'id':373,'buildings':[0,0,0,0,15,0,0,0,0,0,0,0,15,0,0,0,0],'upgrades':[393]},

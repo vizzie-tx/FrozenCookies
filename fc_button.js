@@ -528,7 +528,7 @@ function FCMenu() {
     buildTable = $('<table id="fcEfficiencyTable"/>').html('<tr><th>Building</th><th>Eff%</th><th>Efficiency</th><th>Cost</th><th>&#916; CPS</th></tr>');
     recommendationList().forEach(function(rec) {
       var item  = rec.purchase,
-        chainStr = (item.unlocked === 0) ? ' (C)' : '';
+        chainStr = (item.type !== 'building' && item.unlocked === 0) ? ' (C)' : '';
       buildTable.append($('<tr><td><b>' + item.name + chainStr + '</b></td><td>' + (Math.floor(rec.efficiencyScore * 10000) / 100).toString() + '%</td><td>' + Beautify(rec.efficiency) + '</td><td>' + Beautify(rec.cost) + '</td><td>' + Beautify(rec.delta_cps) + '</td></tr>'));
     });
     // Table Dividers
