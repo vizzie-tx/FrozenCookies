@@ -972,7 +972,7 @@ function isUnavailable(upgrade, upgradeBlacklist) {
   result = result || (upgrade.season && !haveAll(Game.season));
 
   // Blacklist problematic switches
-  if (switchBlacklist.includes(upgrade.id) {
+  if (switchBlacklist.includes(upgrade.id)) {
     result = true;
   }
 
