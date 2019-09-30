@@ -666,7 +666,7 @@ function chocolateValue(bankAmount,earthShatter) {
     } else if (earthShatter) {
       sellRatio=0.5;
       if(!Game.hasAura('Earth Shatterer')) {
-        for (var i in Game.Objects) {if Game.Objects[i].amount>0) highestBuilding = Game.Objects[i];}
+        for (var i in Game.Objects) {if (Game.Objects[i].amount>0) highestBuilding = Game.Objects[i];}
       }
     }
     value = 0.05 * (wrinklerValue() + bankAmount + Game.ObjectsById.reduce(function(s,b){return s + cumulativeBuildingCost(b.basePrice, 1, (b == highestBuilding ? b.amount : b.amount + 1) - b.free) *sellRatio},0));
