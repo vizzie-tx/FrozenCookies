@@ -178,7 +178,18 @@ var numberFormatters = [
     ' septillion',
     ' octillion',
     ' nonillion',
-    ' decillion'
+    ' decillion',
+    ' undecillion',
+    ' duodecillion',
+    ' tredecillion',
+    ' quattuordecillion',
+    ' quindecillion',
+    ' sexdecillion',
+    ' septendecillion',
+    ' octodecillion',
+    ' novemdecillion',
+    ' vigintillion'
+
   ]),
 
   formatEveryThirdPower([
@@ -192,7 +203,18 @@ var numberFormatters = [
     ' Sp',
     ' Oc',
     ' No',
-    ' De'
+    ' De',
+    ' Und',
+    ' Dud',
+    ' Trd',
+    ' Qad',
+    ' Qid',
+    ' Sxd',
+    ' Spd',
+    ' Ocd',
+    ' Nod',
+    ' Vig'
+
   ]),
 
   formatEveryThirdPower([
@@ -203,7 +225,21 @@ var numberFormatters = [
     ' P',
     ' E',
     ' Z',
-    ' Y'
+    ' Y',
+    ' N',
+    ' Te',
+    ' Tk',
+    ' TM',
+    ' TG',
+    ' TT',
+    ' TP',
+    ' TE',
+    ' TZ',
+    ' TY',
+    ' TN',
+    ' BT',
+    ' BTk'
+
   ]),
   scientificNotation
 ];
